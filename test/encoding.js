@@ -171,9 +171,9 @@ describe('negotiator.encoding(array)', function () {
       assert.strictEqual(this.negotiator.encoding([]), undefined)
     })
 
-    it('should return client-preferred encodings', function () {
+    it('should return server-preferred encodings', function () {
       assert.strictEqual(this.negotiator.encoding(['gzip']), 'gzip')
-      assert.strictEqual(this.negotiator.encoding(['identity', 'gzip']), 'gzip')
+      assert.strictEqual(this.negotiator.encoding(['identity', 'gzip']), 'identity')
       assert.strictEqual(this.negotiator.encoding(['identity']), 'identity')
     })
   })
@@ -374,10 +374,10 @@ describe('negotiator.encodings(array)', function () {
       assert.deepEqual(this.negotiator.encodings(['GZIP', 'gzip']), ['GZIP', 'gzip'])
     })
 
-    it('should return client-preferred encodings', function () {
+    it('should return server-preferred encodings', function () {
       assert.deepEqual(this.negotiator.encodings(['gzip']), ['gzip'])
       assert.deepEqual(this.negotiator.encodings(['gzip', 'identity']), ['gzip', 'identity'])
-      assert.deepEqual(this.negotiator.encodings(['identity', 'gzip']), ['gzip', 'identity'])
+      assert.deepEqual(this.negotiator.encodings(['identity', 'gzip']), ['identity', 'gzip'])
       assert.deepEqual(this.negotiator.encodings(['identity']), ['identity'])
     })
   })
@@ -389,10 +389,10 @@ describe('negotiator.encodings(array)', function () {
   })
 
   whenAcceptEncoding('gzip, deflate', function () {
-    it('should return client-preferred encodings', function () {
+    it('should return server-preferred encodings', function () {
       assert.deepEqual(this.negotiator.encodings(['gzip']), ['gzip'])
       assert.deepEqual(this.negotiator.encodings(['gzip', 'identity']), ['gzip', 'identity'])
-      assert.deepEqual(this.negotiator.encodings(['deflate', 'gzip']), ['gzip', 'deflate'])
+      assert.deepEqual(this.negotiator.encodings(['deflate', 'gzip']), ['deflate', 'gzip'])
       assert.deepEqual(this.negotiator.encodings(['identity']), ['identity'])
     })
   })
